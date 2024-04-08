@@ -7,11 +7,11 @@ export class ApplicationServies {
         const data = await prisma.application.create({ data: { opportunityId, ...body }});
 
         return data;
-    }
+    };
 
     async findMany(opportunityId: number): Promise<TApplication[]>{
         const data = await prisma.application.findMany({ where: { opportunityId }});
 
         return data;
-    }
-}
+    };
+};

@@ -12,4 +12,4 @@ app.use(json());
 
 app.use("/opportunities", opportunityRouter);
 
-app.use(HandleErrors.execute)
+app.use(HandleErrors.execute);

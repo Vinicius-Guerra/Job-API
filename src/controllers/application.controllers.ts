@@ -8,13 +8,12 @@ export class ApplicationControllers {
         const response = await applicationServices.create(Number(req.params.id), req.body);
 
         return res.status(201).json(response);
-    }
+    };
 
     async findMany(req: Request, res: Response){
         const applicationServices = new ApplicationServies();
         const response = await applicationServices.findMany(Number(req.params.id));
 
         return res.status(200).json(response);
-    }
-
-}
+    };
+};
