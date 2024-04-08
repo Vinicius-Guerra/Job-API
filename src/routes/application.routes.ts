@@ -6,5 +6,5 @@ export const applicationRouter = Router();
 
 const applicationControllers = new ApplicationControllers();
 
-applicationRouter.post("/", applicationControllers.create);
-applicationRouter.get("/", applicationControllers.findMany);
+applicationRouter.post("/:id/applications", applicationControllers.create);
+applicationRouter.get("/:id/applications", applicationControllers.findMany);

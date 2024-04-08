@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
+import { ApplicationServies } from "../services/application.services";
 
 export class ApplicationControllers {
     
-    create(req: Request, res: Response){
+    async create(req: Request, res: Response){
+        const applicationServices = new ApplicationServies();
+        const response = await applicationServices.create(Number(req.params.id), req.body);
 
+        return res.status(201).json(response);
     }
 
-    findMany(req: Request, res: Response){
+    async findMany(req: Request, res: Response){
+        const applicationServices = new ApplicationServies();
+        const response = await applicationServices.findMany(Number(req.params.id));
 
+        return res.status(200).json(response);
     }
 
 }
