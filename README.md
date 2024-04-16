@@ -1,5 +1,25 @@
 # Vagas e Candidaturas API
 
+# 1. Visão Geral
+Visão geral do projeto, um pouco das tecnologias usadas.
+* Prisma ORM
+* PostgreSQL
+* NodeJS
+* Express
+* TypeScript
+* Zod
+* Insomnia
+
+# 2. Arquitetura
+  - Database;
+  - Prisma + Migrations;
+  - Controller + Services;
+  - ZodSchemas;
+  - Routes;
+  - Middlewares + errors;
+ 
+  
+
 ### POST /opportunities
 
 Padrão de corpo
