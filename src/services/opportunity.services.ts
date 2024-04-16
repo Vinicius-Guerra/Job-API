@@ -1,6 +1,8 @@
+import { injectable } from "tsyringe";
 import { prisma } from "../database/prisma";
 import { TOpportunity, TOpportunityCreate, TOpportunityUpdate } from "../schemas/opportunity.schemas";
 
+@injectable()
 export class OpportunityServices {
     
     async create(body: TOpportunityCreate): Promise<TOpportunity>{
