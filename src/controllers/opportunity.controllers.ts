@@ -15,8 +15,8 @@ export class OpportunityControllers {
     }
 
     async findMany(req: Request, res: Response){
-        
-        const response = await this.opportunityServices.findMany();
+        const id = res.locals.decode?.id;
+        const response = await this.opportunityServices.findMany(Number(id));
 
         return res.status(200).json(response);
     };

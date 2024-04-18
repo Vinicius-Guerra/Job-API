@@ -2,11 +2,15 @@ import { Router } from "express";
 import { OpportunityControllers } from "../controllers/opportunity.controllers";
 import { applicationRouter } from "./application.routes";
 import { ValidateBody } from "../middlewares/validateBody.middleware";
-import { opportunityCreateSchema, opportunityUpdateSchema } from "../schemas/opportunity.schemas";
+import {
+   opportunityCreateSchema,
+   opportunityUpdateSchema,
+} from "../schemas/opportunity.schemas";
 import { IsOpportunityIdValid } from "../middlewares/isOpportunityIdValid.middleware";
 import { container } from "tsyringe";
-import { OpportunityServices } from "../services/opportunity.services";
 import { ValidateToken } from "../middlewares/validateToken.middleware";
+import { OpportunityServices } from "../services/opportunity.services";
+import { IsOpportunityOwner } from "../middlewares/isOpportunityOwner.middleware";
 
 container.registerSingleton("OpportunityServices", OpportunityServices);
 const opportunityControllers = container.resolve(OpportunityControllers);

@@ -11,6 +11,12 @@ const userControllers = container.resolve(UserControllers);
 
 export const userRouter = Router();
 
-userRouter.post("/", ValidateBody.execute(userRegisterBodySchema), (req, res) => { userControllers.register(req, res) });
-userRouter.post("/login", ValidateBody.execute(userLoginBodySchema), (req, res) => { userControllers.login(req,res) });
-userRouter.get("/", ValidateToken.execute, (req, res) => { userControllers.getUser(req,res) });
+userRouter.post("/", ValidateBody.execute(userRegisterBodySchema), (req, res) =>
+   userControllers.register(req, res)
+);
+userRouter.post("/login", ValidateBody.execute(userLoginBodySchema), (req, res) =>
+   userControllers.login(req, res)
+);
+userRouter.get("/", ValidateToken.execute, (req, res) =>
+   userControllers.getUser(req, res)
+);

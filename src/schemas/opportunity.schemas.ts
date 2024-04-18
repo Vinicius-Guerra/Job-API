@@ -5,9 +5,9 @@ export const opportunitySchema = z.object({
     title: z.string().min(1),
     description: z.string().min(1),
     userId: z.number().positive()
-});
+})
 
-export const opportunityCreateSchema = opportunitySchema.omit({ id: true });
+export const opportunityCreateSchema = opportunitySchema.omit({ id: true, userId: true });
 
 export const opportunityUpdateSchema = opportunityCreateSchema.partial();
 

@@ -1,33 +1,34 @@
-import { injectable } from "tsyringe";
 import { prisma } from "../database/prisma";
 import { TOpportunity, TOpportunityCreate, TOpportunityUpdate } from "../schemas/opportunity.schemas";
+import { injectable } from "tsyringe";
 
 @injectable()
 export class OpportunityServices {
-    
-    async create(body: TOpportunityCreate): Promise<TOpportunity>{
-        const data = await prisma.opportunity.create({ data: body });
+   async create(body: TOpportunityCreate, userId: number): Promise<TOpportunity> {
+      const newOpportunity = { ...body, userId };
 
-        return data;
-    };
+      const data = await prisma.opportunity.create({ data: newOpportunity });
 
-    async findMany(): Promise<TOpportunity[]>{
-        const data = await prisma.opportunity.findMany();
+      return data;
+   }
 
-        return data;
-    };
+   async findMany(userId?: number): Promise<TOpportunity[]> {
+      const data = await prisma.opportunity.findMany({ where: { userId }});
 
-    findOne(opportunity: TOpportunity): TOpportunity {
-       return opportunity;
-    };
+      return data;
+   }
 
-    async update(id: number, body: TOpportunityUpdate): Promise<TOpportunity>{
-        const data = await prisma.opportunity.update({ where: { id }, data: body });
+   findOne(opportunity: TOpportunity): TOpportunity { 
+      return opportunity;
+   }
 
-        return data;
-    };
+   async update(id: number, body: TOpportunityUpdate): Promise<TOpportunity> {
+     const data = await prisma.opportunity.update({ where: { id }, data: body });
 
-    async delete(id: number): Promise<void> {
-        await prisma.opportunity.delete({ where: { id }});
-    };
-};
+     return data;
+   }
+
+   async delete(id: number): Promise<void> {
+    await prisma.opportunity.delete({ where: { id }});
+   }
+}
