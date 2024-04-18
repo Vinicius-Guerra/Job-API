@@ -3,17 +3,19 @@ import { prisma } from "../database/prisma";
 import { AppError } from "../errors/appError";
 
 export class IsOpportunityIdValid {
-    static async execute(req: Request, res: Response, next: NextFunction){
-        const id = req.params.id;
+   static async execute(req: Request, res: Response, next: NextFunction) {
+      const id = req.params.id;
 
-        const opportunity = await prisma.opportunity.findFirst({ where: { id: Number(id) }});
+      const opportunity = await prisma.opportunity.findFirst({
+         where: { id: Number(id) },
+      });
 
-        if(!opportunity) {
-            throw new AppError(404, "Opportunity not found");
-        };
+      if(!opportunity){
+        throw new AppError(404, "Opportunity not found");
+      }
 
-        res.locals.opportunity = opportunity;
+      res.locals.opportunity = opportunity;
 
-        next();
-    };
-};
+      next();
+   }
+}
