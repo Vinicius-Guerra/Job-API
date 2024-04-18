@@ -1,5 +1,3 @@
-# Vagas e Candidaturas API
-
 # 1. Visão Geral
 Visão geral do projeto, um pouco das tecnologias usadas.
 * Prisma ORM
@@ -9,6 +7,8 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 * TypeScript
 * Zod
 * Insomnia
+* Tsyringe
+* bcrypt + JWT 
 
 # 2. Arquitetura
   - Database;
@@ -18,9 +18,97 @@ Visão geral do projeto, um pouco das tecnologias usadas.
   - Routes;
   - Middlewares + errors;
  
-  
+# Vagas e Candidaturas API
 
-### POST /opportunities
+## Rotas de Usuário
+
+### Registro de usuário POST /users
+
+Padrão de corpo
+
+```json
+{
+	"name": "Name",
+	"email": "name@email.com",
+	"password": "@12patinhos"
+}
+```
+
+Padrão de resposta (STATUS 201)
+
+```json
+{
+	"id": 1,
+   "name": "Name",
+	"email": "name@email.com"
+}
+```
+
+### Login POST /users/login
+
+Padrão de corpo
+
+```json
+{
+	"email": "name@email.com",
+	"password": "@12patinhos"
+}
+```
+
+Padrão de resposta (STATUS 200)
+
+```json
+{
+   "accessToken": "TokenJWT",
+   "user": {
+      "id": 1,
+      "name": "Name",
+      "email": "name@email.com"
+   }
+}
+```
+
+Possiveis erros
+
+401 UNAUTHORIZED
+
+```json
+{
+   "message": "Email and password doesn't match"
+}
+```
+
+404 NOT FOUND
+
+```json
+{
+   "message": "User not registered"
+}
+```
+
+### Retornar usuário GET /users
+
+É necessário autorização para acessar esta rota, forneça o token do cabeçalho da requisição.
+
+```json
+{
+   "headers": {
+      "Authorization": "Bearerr eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzEzNDUwNzA3fQ.SLI-Qj2WiUACrAZcDmxy55wcuwqAjlGAbiWk1J7jTLQ"
+   }
+}
+```
+
+Padrão de resposta (STATUS 200)
+
+```json
+{
+	"id": 1,
+   "name": "Name",
+	"email": "name@email.com"
+}
+```
+
+### POST /opportunities (Esta rota precisa de autorização)
 
 Padrão de corpo
 
@@ -37,10 +125,10 @@ Padrão de resposta (STATUS 201)
 {
    "id": 1,
    "title": "Lorem ipsum",
-   "description": "Lorem ipsum"
+   "description": "Lorem ipsum",
+   "userId": 1
 }
 ```
-
 ### GET /opportunities
 
 Padrão de resposta (STATUS 200)
@@ -50,12 +138,30 @@ Padrão de resposta (STATUS 200)
    {
       "id": 1,
       "title": "Lorem ipsum",
-      "description": "Lorem ipsum"
+      "description": "Lorem ipsum",
+      "userId": 1
    }
 ]
 ```
 
-### GET /opportunities/:id
+### GET /opportunities/user  (Esta rota precisa de autorização)
+
+
+Padrão de resposta (STATUS 200)
+
+```json
+[
+   {
+      "id": 1,
+      "title": "Lorem ipsum",
+      "description": "Lorem ipsum",
+      "userId": 1
+   }
+]
+```
+
+### GET /opportunities/:id  (Esta rota precisa de autorização)
+
 
 Padrão de resposta (STATUS 200)
 
@@ -63,7 +169,8 @@ Padrão de resposta (STATUS 200)
 {
    "id": 1,
    "title": "Lorem ipsum",
-   "description": "Lorem ipsum"
+   "description": "Lorem ipsum",
+   "userId": 1
 }
 ```
 
@@ -77,7 +184,15 @@ Possíveis erros
 }
 ```
 
-### PATCH /opportunities/:id
+403 FORBIDDEN
+
+```json
+{
+   "message": "User is not the owner of this opportunity"
+}
+```
+
+### PATCH /opportunities/:id (Esta rota precisa de autorização)
 
 Padrão de corpo
 
@@ -94,11 +209,12 @@ Padrão de resposta (STATUS 200)
 {
    "id": 1,
    "title": "Lorem ipsum",
-   "description": "Lorem ipsum"
+   "description": "Lorem ipsum",
+   "userId": 1
 }
 ```
 
-### DELETE /opportunities/:id
+### DELETE /opportunities/:id (Esta rota precisa de autorização)
 
 Nenhum corpo de resposta (STATUS 204)
 
@@ -112,7 +228,16 @@ Possíveis erros
 }
 ```
 
-### POST /opportunities/:id/applications
+403 FORBIDDEN
+
+```json
+{
+   "message": "User is not the owner of this opportunity"
+}
+```
+
+
+### POST /opportunities/:id/applications 
 
 Padrão de corpo
 
@@ -146,7 +271,7 @@ Possíveis erros
 }
 ```
 
-### GET /opportunities/:id/applications
+### GET /opportunities/:id/applications (Esta rota precisa de autorização)
 
 Padrão de resposta (STATUS 200)
 
@@ -169,5 +294,13 @@ Possíveis erros
 ```json
 {
    "message": "Opportunity not found"
+}
+```
+
+403 FORBIDDEN
+
+```json
+{
+   "message": "User is not the owner of this opportunity"
 }
 ```

@@ -9,8 +9,6 @@ import { userRouter } from "./routes/user.routes";
 
 export const app = express();
 
-console.log(process.env.EXAMPLE);
-
 app.use(helmet());
 
 app.use(json());
