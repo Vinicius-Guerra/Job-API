@@ -39,7 +39,7 @@ Padrão de resposta (STATUS 201)
 ```json
 {
 	"id": 1,
-   "name": "Name",
+	"name": "Name",
 	"email": "name@email.com"
 }
 ```
@@ -93,7 +93,7 @@ Possiveis erros
 ```json
 {
    "headers": {
-      "Authorization": "Bearerr eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzEzNDUwNzA3fQ.SLI-Qj2WiUACrAZcDmxy55wcuwqAjlGAbiWk1J7jTLQ"
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzEzNDUwNzA3fQ.SLI-Qj2WiUACrAZcDmxy55wcuwqAjlGAbiWk1J7jTLQ"
    }
 }
 ```
@@ -103,7 +103,7 @@ Padrão de resposta (STATUS 200)
 ```json
 {
 	"id": 1,
-   "name": "Name",
+   	"name": "Name",
 	"email": "name@email.com"
 }
 ```
