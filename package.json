@@ -4,6 +4,8 @@
   "description": "Padrão de corpo",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/app.js",
+    "build": "npx tsc",
     "dev": "dotenv -e .env -- tsnd --respawn src/server.ts",
     "migrate:dev": "dotenv -e .env -- npx prisma migrate dev",
     "studio:dev": "dotenv -e .env -- npx prisma studio"
